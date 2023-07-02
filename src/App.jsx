@@ -51,7 +51,6 @@ function App () {
     count++
     const currentTime = new Date().getTime()
     const elapsedSeconds = Math.floor((currentTime - time.current) / 1000)
-    console.log('elapsedSeconds:', elapsedSeconds)
     time.current = currentTime
     const elem = document.getElementById('myTimer')
     elem.click()
