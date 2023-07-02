@@ -30,8 +30,11 @@ export const Section = ({ dom, handleButtonClick }) => {
             <Typography variant="h6" color="secondary" sx={{ mb: isPrev ? 0 : 2 }}>{dom['ris1']}</Typography>
             {
               !isPrev &&
-              <Button sx={{ mt: 'auto', display: 'block', mx: 'auto' }} onClick={() => handleButtonClick('A')}
-                      variant="outlined">
+              <Button
+                id="ButtonA"
+                sx={{ mt: 'auto', display: 'block', mx: 'auto' }}
+                onClick={() => handleButtonClick('A')}
+                variant="outlined">
                 A
               </Button>
             }
@@ -48,8 +51,11 @@ export const Section = ({ dom, handleButtonClick }) => {
             <Typography variant="h6" color="secondary" sx={{ mb: isPrev ? 0 : 2 }}>{dom['ris2']}</Typography>
             {
               !isPrev &&
-              <Button sx={{ mt: 'auto', display: 'block', mx: 'auto' }} onClick={() => handleButtonClick('B')}
-                      variant="outlined">
+              <Button
+                id="ButtonB"
+                sx={{ mt: 'auto', display: 'block', mx: 'auto' }}
+                onClick={() => handleButtonClick('B')}
+                variant="outlined">
                 B
               </Button>
             }
@@ -66,8 +72,11 @@ export const Section = ({ dom, handleButtonClick }) => {
             <Typography variant="h6" color="secondary" sx={{ mb: isPrev ? 0 : 2 }}>{dom['ris3']}</Typography>
             {
               !isPrev &&
-              <Button sx={{ mt: 'auto', display: 'block', mx: 'auto' }} onClick={() => handleButtonClick('C')}
-                      variant="outlined">
+              <Button
+                id="ButtonC"
+                sx={{ mt: 'auto', display: 'block', mx: 'auto' }}
+                onClick={() => handleButtonClick('C')}
+                variant="outlined">
                 C
               </Button>
             }

@@ -1,28 +1,39 @@
 import master from './quiz.json'
+import findIndex from 'lodash/findIndex'
 
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
-import { useRef, useState } from 'react'
+import { AppBar, Box, Button, Paper, Toolbar, Typography } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
 import { Timer } from './Timer.jsx'
 import { Section } from './Section.jsx'
+import Timer2 from './Timer2.jsx'
 
-function getRandomObjectWithVolteZero (array) {
-  const filteredArray = array.filter(obj => !obj.volte)
-  return Math.floor(Math.random() * filteredArray.length)
-}
-
+const total = master.length
 const sbagliate = []
+let count = 0
 
 function App () {
   const [quiz] = useState(() => {
     const savedQuiz = sessionStorage.getItem('savedQuiz')
-    return savedQuiz ? JSON.parse(savedQuiz) : master
+    if (savedQuiz) {
+      const parsedQuiz = JSON.parse(savedQuiz)
+      const startDone_ = parsedQuiz.filter(row => row.volte > 0)
+      count = startDone_?.length || 0
+      return parsedQuiz
+    } else {
+      return master
+    }
   })
-  const randomIndex = getRandomObjectWithVolteZero(quiz)
-  const dom = quiz[randomIndex]
+  const filteredArray = quiz.filter(obj => !obj.volte)
+  const randomIndex = Math.floor(Math.random() * filteredArray.length)
+  const dom = filteredArray[randomIndex]
+  const originalIndex = findIndex(quiz, { num: dom.num })
   const time = useRef(new Date().getTime())
   const { num, reg, esa } = dom
   const [isRunning] = useState(true)
   const [stats, setStats] = useState({ esatte: 0, sbagliate: 0 })
+  const totale = stats.esatte + stats.sbagliate
+  const percentualeSbagliate = Math.round((stats.sbagliate / totale) * 100)
+  
   const handleButtonClick = risposta => {
     if (risposta === esa) {
       setStats(prevStats => ({
@@ -34,16 +45,17 @@ function App () {
         ...prevStats,
         sbagliate: prevStats.sbagliate + 1,
       }))
-      quiz[randomIndex].sbagliata = quiz[randomIndex].sbagliata ? quiz[randomIndex].sbagliata + 1 : 1
+      quiz[originalIndex].sbagliata = quiz[originalIndex].sbagliata ? quiz[originalIndex].sbagliata + 1 : 1
       sbagliate.push(dom)
     }
-    const currentTime = new Date().getTime();
+    count++
+    const currentTime = new Date().getTime()
     const elapsedSeconds = Math.floor((currentTime - time.current) / 1000)
     console.log('elapsedSeconds:', elapsedSeconds)
     time.current = currentTime
     const elem = document.getElementById('myTimer')
     elem.click()
-    quiz[randomIndex].volte = quiz[randomIndex].volte ? quiz[randomIndex].volte + 1 : 1
+    quiz[originalIndex].volte = quiz[originalIndex].volte ? quiz[originalIndex].volte + 1 : 1
     setStats((prevStats) => ({
       ...prevStats,
       domPrev: { ...dom, elapsedSeconds, risposta },
@@ -52,6 +64,26 @@ function App () {
   const save = () => {
     sessionStorage.setItem('savedQuiz', JSON.stringify(quiz))
   }
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.keyCode === 37) {
+        const elem = document.getElementById('ButtonA')
+        elem.click()
+      } else if (event.keyCode === 38) {
+        const elem = document.getElementById('ButtonB')
+        elem.click()
+      } else if (event.keyCode === 39) {
+        const elem = document.getElementById('ButtonC')
+        elem.click()
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown)
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
   console.log('sbagliate:', sbagliate)
   return (
     <>
@@ -77,6 +109,14 @@ function App () {
           </Toolbar>
         </AppBar>
         <Section dom={dom} handleButtonClick={handleButtonClick}/>
+        <Paper display="flex" sx={{ pt: 1, pb: 1, mt: 2, pl: 2, pr: 2 }}>
+          <Box display="flex" justifyContent="space-between">
+            <Box>{count} / {total}</Box>
+            <Box display="flex" justifyContent="center">{totale} / <span
+              style={{ color: 'red', marginLeft: 5 }}>{stats.sbagliate} ({percentualeSbagliate || 0}%)</span></Box>
+            <Box><Timer2/></Box>
+          </Box>
+        </Paper>
       </Box>
       <Box
         sx={{
