@@ -13,7 +13,7 @@ let count = 0
 
 function App () {
   const [quiz] = useState(() => {
-    const savedQuiz = sessionStorage.getItem('savedQuiz')
+    const savedQuiz = localStorage.getItem('savedQuiz')
     if (savedQuiz) {
       const parsedQuiz = JSON.parse(savedQuiz)
       const startDone_ = parsedQuiz.filter(row => row.volte > 0)
@@ -61,7 +61,7 @@ function App () {
     }))
   }
   const save = () => {
-    sessionStorage.setItem('savedQuiz', JSON.stringify(quiz))
+    localStorage.setItem('savedQuiz', JSON.stringify(quiz))
   }
   useEffect(() => {
     const handleKeyDown = (event) => {

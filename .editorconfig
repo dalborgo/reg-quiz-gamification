@@ -1,0 +1,4 @@
+root = true
+
+[{*.tsx, *.css, *.js, *.ts, *.json}]
+end_of_line = lf
