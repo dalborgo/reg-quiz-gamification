@@ -2812,7 +2812,7 @@
     "dom": "Il pallone colpisce l’Arbitro al volto ed entra direttamente in porta. Su indicazione degli Assistenti (Ufficiali) potrà comunque convalidare la rete anche se non ha potuto controllarla personalmente.",
     "ris1": "Vero",
     "ris2": "Falso. L'Arbitro riprende il gioco con una sua rimessa nel punto ove è stato colpito dal pallone",
-    "ris3": "Vero solo se il pallone entra in porta immediatamente dopo che il pallone ha colpito al volto l'Arbtro",
+    "ris3": "Vero solo se il pallone entra in porta immediatamente dopo che il pallone ha colpito al volto l'Arbitro",
     "esa": "B",
     "reg": 10
   },
@@ -2884,7 +2884,7 @@
     "dom": "Un portiere, trovandosi all’interno della propria area di rigore, dopo aver effettuato una parata, lancia il pallone con le mani che finisce nella rete della porta avversaria. L’Arbitro...",
     "ris1": "assegnerà un calcio di rinvio",
     "ris2": "convaliderà la rete",
-    "ris3": "riprendera il gioco con una propria rimessa",
+    "ris3": "riprenderà il gioco con una propria rimessa",
     "esa": "A",
     "reg": 10
   },
