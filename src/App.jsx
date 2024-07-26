@@ -24,6 +24,7 @@ function App () {
     }
   })
   const filteredArray = quiz.filter(obj => !obj.volte)
+  //const filteredArray = quiz.filter(obj => obj.sbagliata === 1 && obj.volte === 1)
   const randomIndex = Math.floor(Math.random() * filteredArray.length)
   const dom = filteredArray[randomIndex]
   const originalIndex = findIndex(quiz, { num: dom.num })
