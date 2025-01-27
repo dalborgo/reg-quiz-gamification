@@ -7,7 +7,6 @@ import { Timer } from './Timer.jsx'
 import { Section } from './Section.jsx'
 import Timer2 from './Timer2.jsx'
 
-const total = master.length
 const sbagliate = []
 let count = 0
 
@@ -23,8 +22,9 @@ function App () {
       return master
     }
   })
-  const filteredArray = quiz.filter(obj => !obj.volte)
-  //const filteredArray = quiz.filter(obj => obj.sbagliata === 1 && obj.volte === 1)
+  const filteredArray = quiz.filter(obj => !obj.volte && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
+  const total = filteredArray.length
+  //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte > 0)
   const randomIndex = Math.floor(Math.random() * filteredArray.length)
   const dom = filteredArray[randomIndex]
   const originalIndex = findIndex(quiz, { num: dom.num })
