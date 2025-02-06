@@ -23,7 +23,8 @@ function App () {
     }
   })
   const filteredArray = quiz.filter(obj => !obj.volte && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
-  const total = filteredArray.length
+  //const total = filteredArray.length
+  const total = quiz.filter(obj => obj.reg !== 'ASS' && obj.reg !== 'NFOT').length
   //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte > 0)
   const randomIndex = Math.floor(Math.random() * filteredArray.length)
   const dom = filteredArray[randomIndex]
