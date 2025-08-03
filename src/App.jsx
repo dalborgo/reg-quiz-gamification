@@ -22,7 +22,7 @@ function App () {
       return master
     }
   })
-  //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte ===1 && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
+  //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte === 1 && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
   const filteredArray = quiz.filter(obj => !obj.volte && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
   //const total = filteredArray.length
   const total = quiz.filter(obj => obj.reg !== 'ASS' && obj.reg !== 'NFOT').length
