@@ -7,7 +7,6 @@ import { Timer } from './Timer.jsx'
 import { Section } from './Section.jsx'
 import Timer2 from './Timer2.jsx'
 
-const total = master.length
 const sbagliate = []
 let count = 0
 
@@ -23,8 +22,11 @@ function App () {
       return master
     }
   })
-  const filteredArray = quiz.filter(obj => !obj.volte)
-  //const filteredArray = quiz.filter(obj => obj.sbagliata === 1 && obj.volte === 1)
+  //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte === 1 && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
+  const filteredArray = quiz.filter(obj => !obj.volte && obj.reg !== 'ASS' && obj.reg !== 'NFOT')
+  //const total = filteredArray.length
+  const total = quiz.filter(obj => obj.reg !== 'ASS' && obj.reg !== 'NFOT').length
+  //const filteredArray = quiz.filter(obj => obj.sbagliata > 0 && obj.volte > 0)
   const randomIndex = Math.floor(Math.random() * filteredArray.length)
   const dom = filteredArray[randomIndex]
   const originalIndex = findIndex(quiz, { num: dom.num })
@@ -91,7 +93,7 @@ function App () {
         <AppBar position="static" sx={{ mb: 2, mt: 1 }}>
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} color="primary">
-              Domanda n. {num} - Reg. {reg}
+              Domanda n. {num}{reg ? `- Reg. ${reg}` : ''}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box>
